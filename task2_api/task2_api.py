@@ -107,6 +107,7 @@ class MovieData:
         writer.writerow(['Title', 'Popularity', 'Score', 'Last day in cinema'])
         for dictionary in self.sorted_movie_data:
             writer.writerow(dictionary.values())
+
         my_file.close()
         my_file = open('demo_file.csv', 'r')
         print("The content of the csv file is:")
