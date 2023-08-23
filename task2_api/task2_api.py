@@ -19,7 +19,7 @@ class MovieData:
 
     def __init__(self, num_pages):
         self.num_pages = num_pages
-        self.movie_data = None
+        self.movie_data = []
         self.sorted_movie_data = None
 
     def fetch_data(self, url):
@@ -34,9 +34,10 @@ class MovieData:
             url = f'{self.BASE_URL}discover/movie?include_adult=false&include_video=false' \
                   f'&sort_by=popularity.desc&page={i}'
 
-            movie_data = self.fetch_data(url)
-            if movie_data is not None:
-                self.movie_data = movie_data['results']
+            page = self.fetch_data(url)
+            if page is not None:
+                self.movie_data.extend(page['results'])
+        return self.movie_data
 
     def get_unique_genres(self):
         url = f'{self.BASE_URL}genre/movie/list?language=en'
